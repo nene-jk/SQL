@@ -1,0 +1,28 @@
+--Create a apparel store database
+
+CREATE TABLE store (id INTEGER PRIMARY KEY, item TEXT, section TEXT, size TEXT, price_in_usd INTEGER);
+
+INSERT INTO store VALUES (1, "t-shirt", "Tops", "S", 15.5);
+INSERT INTO store VALUES (2, "blazer", "Jackets", "L", 32);
+INSERT INTO store VALUES (3, "short denim skirt", "Bottoms", "M", 22.99);
+INSERT INTO store VALUES (4, "long denim skirt", "Bottoms", "L", 24.99);
+INSERT INTO store VALUES (5, "sandals", "Shoes", "M", 36.5);
+INSERT INTO store VALUES (6, "maxi dress", "Dresses", "S", 43);
+INSERT INTO store VALUES (7, "puffer jacket", "Jackets", "S", 39.99);
+INSERT INTO store VALUES (8, "t-shirt", "Tops", "M", 15.5);
+INSERT INTO store VALUES (9, "maxi dress", "Dresses", "L", 43);
+INSERT INTO store VALUES (10, "boots", "Shoes", "M", 25);
+INSERT INTO store VALUES (11, "blazer", "Jackets", "M", 32);
+INSERT INTO store VALUES (12, "sandals", "Shoes", "S", 36.5);
+INSERT INTO store VALUES (13, "boots", "Shoes", "S", 25);
+INSERT INTO store VALUES (14, "t-shirt", "Tops", "L", 15.5);
+INSERT INTO store VALUES (15, "sandals", "Shoes", "L", 36.5);
+
+--display the database ordered by price. 
+SELECT * FROM store ORDER BY price_in_usd desc; 
+
+--what is the avg price of items in the Shoes section? 
+SELECT AVG(price_in_usd) "avg Shoes price" FROM store WHERE section='Shoes'; 
+
+--what are the top 5 expensive items? 
+SELECT item, section, price_in_usd FROM store ORDER BY price_in_usd desc limit 5; 
