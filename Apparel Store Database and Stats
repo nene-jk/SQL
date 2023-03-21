@@ -1,4 +1,4 @@
---Create a apparel store database
+--Create an apparel store database
 
 CREATE TABLE store (id INTEGER PRIMARY KEY, item TEXT, section TEXT, size TEXT, price_in_usd INTEGER);
 
