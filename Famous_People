@@ -1,0 +1,79 @@
+-- Create a series databases on information about celebrities
+
+CREATE TABLE celebrity (id INTEGER PRIMARY KEY,
+    fullname TEXT,
+    birth_year INTEGER,
+    job TEXT);
+    
+INSERT INTO celebrity 
+    VALUES (1, "Taylor Swift", 1989, "Singer");
+INSERT INTO celebrity 
+    VALUES (2, "Penn Badgley", 1986, "Actor");
+INSERT INTO celebrity 
+    VALUES (3, "Zendaya", 1996, "Actor");
+INSERT INTO celebrity 
+    VALUES (4, "Tom Holland", 1996, "Actor");
+INSERT INTO celebrity 
+    VALUES (5, "Harry Styles", 1994, "Singer");
+INSERT INTO celebrity 
+    VALUES (6, "Harry Styles", 1994, "Actor");
+INSERT INTO celebrity 
+    VALUES (7, "Beyoncé", 1981, "Singer");
+INSERT INTO celebrity 
+    VALUES (8, "Beyoncé",1981, "Actor");
+INSERT INTO celebrity 
+    VALUES (9, "Steve Martin", 1945, "Actor");
+INSERT INTO celebrity 
+    VALUES (10, "Selena Gomez", 1992, "Singer");
+INSERT INTO celebrity 
+    VALUES (11, "Selena Gomez", 1992, "Actor");
+
+CREATE TABLE movies_and_shows (id INTEGER PRIMARY KEY,
+    title TEXT,
+    celebrity_id INTEGER,
+    costar_id INTEGER,
+    year INTEGER);
+
+INSERT INTO movies_and_shows 
+    VALUES (1, "YOU", 2, "", 2018);
+INSERT INTO movies_and_shows 
+    VALUES (2, "Spider-Man: No Way Home",3, 4, 2021);
+INSERT INTO movies_and_shows 
+    VALUES (3,"Spider-Man: No Way Home", 4, 3, 2021);
+INSERT INTO movies_and_shows 
+    VALUES (4, "Pink Panther", 7, 9, 2006);
+INSERT INTO movies_and_shows 
+    VALUES (5, "Pink Panther", 9, 7, 2006);
+INSERT INTO movies_and_shows 
+    VALUES (6, "Only Murders in the Building", 9, 10, 2021);
+INSERT INTO movies_and_shows 
+    VALUES (7, "Only Murders in the Building", 10, 9, 2021);
+
+CREATE TABLE romantic_hist (id INTEGER PRIMARY KEY,
+    celeb_1 INTEGER,
+    celeb_2 INTEGER);
+
+INSERT INTO romantic_hist 
+    VALUES (1, 1, 5);
+INSERT INTO romantic_hist 
+    VALUES (2, 3, 4);
+    
+-- Pair the celebrities with the movie or tv show that they have starred in
+SELECT fullname, title FROM celebrity
+    LEFT JOIN movies_and_shows
+    ON celebrity.id = movies_and_shows.celebrity_id;
+
+-- Pair celebrities who have a romantic history together
+SELECT a.fullname, b.fullname FROM romantic_hist
+    JOIN celebrity a
+    ON a.id = romantic_hist.celeb_1
+    JOIN celebrity b
+    ON b.id = romantic_hist.celeb_2;
+
+-- Pair each celebrity with their co-stars from each movie or tv show
+SELECT a.fullname, b.fullname, title FROM movies_and_shows
+    JOIN celebrity a
+    ON a.id = movies_and_shows.celebrity_id
+    JOIN celebrity b
+    ON b.id = movies_and_shows.costar_id
+    GROUP BY title;
