@@ -242,22 +242,23 @@ SELECT SUM(population) AS total_population FROM countries;
  Gen X - ages 43 to 58 (1965-1980)
  Millenial - ages 29 to 42 (1981-1994) 
  Gen Z - ages 11 to 28 (1995-2012)
+ 
 SELECT name, population, median_age,
     CASE 
-        WHEN median_age >= 59 AND median_age         <= 68 THEN "Boomer"
-        WHEN median_age >= 43 AND median_age         <= 58 THEN "Gen X"
-        WHEN median_age >= 29 AND median_age         <= 42 THEN "Millenial"
-        WHEN median_age >= 11 AND median_age         <= 28 THEN "Gen Z"
+        WHEN median_age >= 59 AND median_age <= 68 THEN "Boomer"
+        WHEN median_age >= 43 AND median_age <= 58 THEN "Gen X"
+        WHEN median_age >= 29 AND median_age <= 42 THEN "Millenial"
+        WHEN median_age >= 11 AND median_age <= 28 THEN "Gen Z"
     END AS "generation"
 FROM countries;  
 
 -- How many countries fall under each generational group?
 SELECT COUNT(*) name, 
     CASE 
-        WHEN median_age >= 59 AND median_age         <= 68 THEN "Boomer"
-        WHEN median_age >= 43 AND median_age         <= 58 THEN "Gen X"
-        WHEN median_age >= 29 AND median_age         <= 42 THEN "Millenial"
-        WHEN median_age >= 11 AND median_age         <= 28 THEN "Gen Z"
+        WHEN median_age >= 59 AND median_age <= 68 THEN "Boomer"
+        WHEN median_age >= 43 AND median_age <= 58 THEN "Gen X"
+        WHEN median_age >= 29 AND median_age <= 42 THEN "Millenial"
+        WHEN median_age >= 11 AND median_age <= 28 THEN "Gen Z"
     END AS "generation"
 FROM countries
 GROUP BY generation;  
