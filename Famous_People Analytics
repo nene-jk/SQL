@@ -1,4 +1,4 @@
--- Create a database on information about celebrities
+-- In this SQL code, I am creating a database which holds information about celebrities to answer questions about the data.
 
 CREATE TABLE celebrity (id INTEGER PRIMARY KEY,
     fullname TEXT,
