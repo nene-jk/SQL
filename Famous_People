@@ -1,4 +1,4 @@
--- Create a series databases on information about celebrities
+-- Create a database on information about celebrities
 
 CREATE TABLE celebrity (id INTEGER PRIMARY KEY,
     fullname TEXT,
