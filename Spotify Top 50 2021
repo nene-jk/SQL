@@ -1,3 +1,6 @@
+#In this project, I downloaded a "Spotify top 50 songs in 2021" dataset from Kaggle in order to perform an analysis.
+
+#I started off by creating a table to insert the Spotify data:
 CREATE TABLE BIT_DB.Spotifydata (
     id               INTEGER        PRIMARY KEY,
     artist_name      VARCHAR        NOT NULL,
@@ -19,27 +22,44 @@ CREATE TABLE BIT_DB.Spotifydata (
     time_signature   INTEGER        NOT NULL
 );
 
+#Then I inserted the Spotify Data .csv into the table.
+
+#Lastly, I explored the data to answer a few questions (listed below).
+
 SELECT *
   FROM BIT_DB.Spotifydata;
 
+#1. List the top 5 artists and tracks by popularity.
+SELECT artist_name,
+       track_name,
+       popularity
+  FROM BIT_DB.Spotifydata
+ ORDER BY popularity DESC
+ LIMIT 5;
+
+#2. What was the most song and artist was with the highest popularity? 
 SELECT track_name,
        artist_name,
        MAX(popularity) 
   FROM BIT_DB.Spotifydata;
 
+#3. What was their avarage popularity?
 SELECT artist_name,
        AVG(popularity) 
   FROM BIT_DB.Spotifydata
  WHERE artist_name LIKE '%Olivia Rodrigo%';
 
+#4. How many of the artist's song(s) made it onto Spotify's TOP 50 list?
 SELECT count(track_name) 
   FROM BIT_DB.Spotifydata
  WHERE artist_name LIKE '%Olivia Rodrigo%';
 
+#5. What was the avarage duration of all of their songs?
 SELECT artist_name,
        AVG(duration_ms) 
   FROM BIT_DB.Spotifydata;
 
+#6. List the top 5 most danceable songs and their artists?
 SELECT track_name,
        artist_name,
        MAX(danceability) danceability
@@ -48,13 +68,7 @@ SELECT track_name,
  ORDER BY danceability DESC
  LIMIT 5;
 
-SELECT artist_name,
-       track_name,
-       popularity
-  FROM BIT_DB.Spotifydata
- ORDER BY popularity DESC
- LIMIT 5;
-
+#7. Determined the avg popularity, danceability, and energy by artist and track.
 SELECT artist_name,
        track_name,
        avg(popularity),
