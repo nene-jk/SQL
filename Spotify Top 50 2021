@@ -1,6 +1,6 @@
 #In this project, I downloaded a "Spotify top 50 songs in 2021" dataset from Kaggle in order to perform an analysis.
 
-#I started off by creating a table to insert the Spotify data:
+#I started off by creating a table to insert the Spotify data into:
 CREATE TABLE BIT_DB.Spotifydata (
     id               INTEGER        PRIMARY KEY,
     artist_name      VARCHAR        NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE BIT_DB.Spotifydata (
     time_signature   INTEGER        NOT NULL
 );
 
-#Then I inserted the Spotify Data .csv into the table.
+#Then I inserted the SpotifyData.csv into the table.
 
 #Lastly, I explored the data to answer a few questions (listed below).
 
