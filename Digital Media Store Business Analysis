@@ -1,0 +1,136 @@
+# In this project, I uploaded a csv file the contained data about a digital Media store called Chinook. 
+# I then explored the database in order to conduct analysis on business performance. 
+
+# First, I started off answering questions about the staff at the store to analyze employee performance. 
+
+# 1. List all of the employees who are sales agents.
+SELECT LastName,
+       FirstName,
+       Title
+  FROM chinook.employees
+ WHERE Title LIKE '%Support%';
+ 
+# 2. Select the sales agent who has worked with the company for the longest. 
+SELECT LastName,
+      FirstName,
+      Max(HireDate) 
+ FROM chinook.employees
+WHERE Title LIKE '%Support%';
+ 
+# 3. How many customers has each of sales agent assisted?
+SELECT employees.FirstName,
+      employees.LastName,
+      Count(CustomerID) TotalCustomers
+ FROM chinook.employees employees
+      JOIN
+      chinook.customers customers ON employees.Employeeid = customers.SupportRepID
+GROUP BY employees.LastName;
+ 
+# 4. Show the total sales made by each sales agent.
+SELECT emp.FirstName,
+      emp.LastName,
+      ROUND(SUM(Inv.Total), 2) AS [Total Sales]
+ FROM chinook.Employees emp
+      JOIN
+      chinook.Customers cust ON cust.SupportRepId = emp.EmployeeId
+      JOIN
+      chinook.Invoices Inv ON Inv.CustomerId = cust.CustomerId
+WHERE emp.Title = 'Sales Support Agent'
+GROUP BY emp.FirstName;
+ 
+# Based on the answers from questions 2-4, it seems as though Steve Johnson has worked the longest as the company; however, he has assisted the 
+ least amount of customers and have brought in the least in total sales. This might mean that he needs further training or a performance review to help
+ boost his performance.
+ 
+# Then, I dug deeper into some customer and order data to determine what areas of the business can be improved or 
+ leveraged to build an effective growth strategy for the future.
+ 
+# 5. List the total number of customers per country. 
+SELECT Country,
+      Count(CustomerId) TotalCustomers
+ FROM chinook.customers
+GROUP BY Country
+ORDER BY TotalCustomers DESC;
+ 
+# It looks like U.S. has had the most amount of customers. This may be important information to look at for the marketing department. They may decide
+ to focus their marketing/sales efforts and budget in the USA.
+ 
+# 6. Show all of the customers from the USA. 
+SELECT CustomerId,
+      FirstName,
+      LastName
+ FROM chinook.customers
+WHERE Country = 'USA';
+ 
+# 7. Which US state had to most customers?
+SELECT State,
+       Count(CustomerId) TotalCustomers
+  FROM chinook.customers
+ WHERE country = 'USA'
+ GROUP BY state
+ ORDER BY Count(state) DESC;
+
+# 8. Which US state generated the highes total sales amount?
+SELECT state,
+       sum(total) AS [Total Sales]
+  FROM chinook.customers cust
+       JOIN
+       chinook.invoices inv ON cust.customerId = inv.customerId
+       JOIN
+       chinook.invoice_items items ON inv.invoiceId = items.invoiceId
+ WHERE BillingCountry = 'USA'
+ GROUP BY state
+ ORDER BY sum(total) DESC;
+
+# As this is the highest grossing state, it should be looked at as the key market for developing an effective business strategy (i.e. during the product
+development strategies and coming up with pricing and expansion strategies.
+ 
+# 9. What is the total sales amount generated in the USA overall?
+SELECT SUM(total) AS [Total US Sales]
+ FROM chinook.invoice_items items
+      JOIN
+      chinook.invoices invoices ON items.invoiceId = invoices.invoiceId
+WHERE BillingCountry = 'USA';
+ 
+# 10.  What was the total sales amount in the US for each year?
+SELECT Round(SUM(total)) AS [Total Sales]
+  FROM chinook.invoice_items items
+       JOIN
+       chinook.invoices invoices ON items.invoiceId = invoices.invoiceId
+ WHERE BillingCountry = 'USA' AND 
+       InvoiceDate LIKE '%2009%';
+
+SELECT Round(SUM(total)) AS [Total Sales]
+  FROM chinook.invoice_items items
+       JOIN
+       chinook.invoices invoices ON items.invoiceId = invoices.invoiceId
+ WHERE BillingCountry = 'USA' AND 
+       InvoiceDate LIKE '%2010%';
+
+SELECT Round(SUM(total)) AS [Total Sales]
+  FROM chinook.invoice_items items
+       JOIN
+       chinook.invoices invoices ON items.invoiceId = invoices.invoiceId
+ WHERE BillingCountry = 'USA' AND 
+       InvoiceDate LIKE '%2011%';
+
+SELECT Round(SUM(total)) AS [Total Sales]
+  FROM chinook.invoice_items items
+       JOIN
+       chinook.invoices invoices ON items.invoiceId = invoices.invoiceId
+ WHERE BillingCountry = 'USA' AND 
+       InvoiceDate LIKE '%2012%';
+
+SELECT Round(SUM(total)) AS [Total Sales]
+  FROM chinook.invoice_items items
+       JOIN
+       chinook.invoices invoices ON items.invoiceId = invoices.invoiceId
+ WHERE BillingCountry = 'USA' AND 
+       InvoiceDate LIKE '%2013%';
+
+# Knowing the total sales generated for each year would be helpful in coming up with a business stragety to support growth in the next coming years. 
+By creating a graph of each year's total sales, we will be able to identify any trends and forecast and future activities.
+ 
+ 
+ 
+ 
