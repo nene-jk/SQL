@@ -1,4 +1,5 @@
-# In this project, I uploaded a csv file the contained data about a digital Media store called Chinook. 
+# In this project, I uploaded a csv file the contained data about a digital Media store called Chinook and designed a new database to extract only 
+the necessary data, trasforming them into new tables. 
 # I then explored the database in order to conduct analysis on business performance. 
 
 # First, I started off answering questions about the staff at the store to analyze employee performance. 
